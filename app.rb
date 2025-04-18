@@ -29,6 +29,13 @@ get("/payment/new") do
   erb(:payment_new)
 end
 
+get("/payment/results") do
+  @apr = params.fetch("apr").to_f
+  @years = params.fetch("years").to_f
+  @principal = params.fetch("principal").to_f
+  erb(:payment_results)
+end
+
 get("/random/new") do
   erb(:random_new)
 end

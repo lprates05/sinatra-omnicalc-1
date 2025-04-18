@@ -1,5 +1,6 @@
 require "sinatra"
 require "sinatra/reloader"
+require "active_support/all"
 
 get("/") do
   erb(:hello)
@@ -36,9 +37,9 @@ get("/payment/results") do
 
   @payment = (@apr/100/12 * @principal) / (1-((1 + @apr/100/12)**(-(@years*12))))
 
-  @apr_print = "#{@apr}%"
-  @principal_print = "$#{@principal}"
-  @payment_print = "$#{@payment.round(2)}"
+  @apr_print = @apr.round(4).to_fs(:percentage, precision: 4)
+  @principal_print = @principal.to_fs(:currency)
+  @payment_print = @payment.to_fs(:currency)  
 
   erb(:payment_results)
 end
@@ -51,5 +52,6 @@ get("/random/results") do
   @num_min = params.fetch("num_min").to_f
   @num_max = params.fetch("num_max").to_f
 
+  @num_random = rand(@num_min..@num_max)
   erb(:random_results)
 end

@@ -1,0 +1,11 @@
+
+<form action = "/random/results">
+  <label for "num_min_input">Minimum</label>
+  <input id = "num_min_input" name= "num_min" type = "integer" placeholder = "E.g. 1.5">  </input>
+  
+  <label for "num_max_input">Minimum</label>
+  <input id = "num_max_input" name= "num_max" type = "integer" placeholder = "E.g. 4.5">  </input>
+
+  <button>Pick random number</button>
+
+</form>

@@ -31,8 +31,15 @@ end
 
 get("/payment/results") do
   @apr = params.fetch("apr").to_f
-  @years = params.fetch("years").to_f
+  @years = params.fetch("years").to_i
   @principal = params.fetch("principal").to_f
+
+  @payment = (@apr/100/12 * @principal) / (1-((1 + @apr/100/12)**(-(@years*12))))
+
+  @apr_print = "#{@apr}%"
+  @principal_print = "$#{@principal}"
+  @payment_print = "$#{@payment.round(2)}"
+
   erb(:payment_results)
 end
 
